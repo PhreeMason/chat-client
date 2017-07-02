@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import NavBar from './navs/NavBar'
+import NavBar from '../navs/NavBar'
+import Signup from '../components/signup'
 
 const home = () => (<div>home</div>)
-const signup = () => (<div>signup</div>)
 const dominoRoom = () =>(<div>dominoRoom</div>)
 const NotFound = () =>(<h1>Wrong turn</h1>)
 
@@ -17,7 +17,7 @@ class App extends Component {
           </div>
           <Switch>
           <Route exact path="/" component={home} />
-          <Route exact path="/signup" component={signup} />
+          <Route exact path="/signup" component={Signup} />
           <Route exact path="/dominoRoom" component={dominoRoom} />
           <Route component={NotFound}/>
           </Switch>
