@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import NavBar from '../components/nav-bar'
-import SignUp from '../components/sign-up'
+import NavBar from '../components/NavBar'
+import SignUp from '../components/SignUp'
 
 const home = () => (<div>home</div>)
 const dominoRoom = () =>(<div>dominoRoom</div>)
