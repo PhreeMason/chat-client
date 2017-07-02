@@ -5,15 +5,17 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import {reducer as form } from 'redux-form'
+import auth from '../modules/Auth/reducer'
 
 const reducers = combineReducers({
-	form
+	form,
+	auth
 })
 
 const middleware = [thunk]
 
 export default createStore(
   reducers,
-  window._REDUX_DEVTOOLS_EXTENSIONS && window._REDUX_DEVTOOLS_EXTENSION(),
-  applyMiddleware(...middleware)
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(...middleware),
 )
