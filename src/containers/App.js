@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import NavBar from './Navs/NavBar'
+import NavBar from './navs/NavBar'
 
 const home = () => (<div>home</div>)
 const signup = () => (<div>signup</div>)
