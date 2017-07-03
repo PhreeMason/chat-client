@@ -1,5 +1,5 @@
-import 'isomorphic-fetch';
 import { reset, SubmissionError } from'redux-form'
+import serverApi from '../../helpers/Api'
 
 export const authenticationRequest = () =>{
 	return {
@@ -18,18 +18,10 @@ export const setCurrentUser = user => {
 export const signup = (user, router)=>{
 	return dispatch => {
 		dispatch(authenticationRequest())
-		return fetch('/users',{
-			method: 'POST',
-			headers:{
-				'Accept': 'application/json',
-				'content-Type': 'application/json'
-			},
-			body: JSON.stringify({user: userDetails})
-		})
-		.then(response => response.json())
+		return serverApi.createUser(user)
 		.then(body=>{
 			const slug = body.user.username
-			localStorage.setItem('e.shop.token', body.token)
+			localStorage.setItem('token', body.token)
 			dispatch(setCurrentUser(body.user))
 			dispatch(reset('signup'))
 			router.history.replace(`/users/${slug}/profile`);
@@ -38,4 +30,21 @@ export const signup = (user, router)=>{
 			throw new SubmissionError(err)
 		})
 	}
+}
+
+export const login = (user, router) => {
+  return dispatch => {
+    dispatch(authenticationRequest()); 
+    return serverApi.loginUser(user)
+      .then(body => {
+        const { user, token } = body;
+        localStorage.setItem('token', token);
+        dispatch(setCurrentUser(user))
+        dispatch(reset('login'));
+        router.history.replace(`/users/${user.username}/profile`);
+      })
+      .catch((err) => {
+        throw new SubmissionError(err)
+      })
+  }
 }
