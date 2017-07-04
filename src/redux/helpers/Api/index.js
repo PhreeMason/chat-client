@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3000/api/v1';
+const url = 'http://localhost:3001/api/v1';
 
 // const userToken =()=> {
 // 	const token  = localStorage.getItem('token');
