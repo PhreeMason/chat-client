@@ -1,15 +1,14 @@
 import axios from 'axios';
 
-const url = process.env.REACT_APP_API_URL;
+const url = 'http://localhost:3000/api/v1';
 
-const userToken =()=> {
-	const token  = localStorage.getItem('token');
-	return {'Authorization': `Bearer: ${token}`}
-}
+// const userToken =()=> {
+// 	const token  = localStorage.getItem('token');
+// 	return {'Authorization': `Bearer: ${token}`}
+// }
 
 export default {
 	createUser(user){
-		debugger
 		return axios.post(`${url}/users`, user) 
 	},
 
