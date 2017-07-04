@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
-
 export default class NavBar extends Component {
   state = {}
 
@@ -14,7 +13,7 @@ export default class NavBar extends Component {
     return (
       <Menu stackable inverted>
         <Menu.Item>
-          <img src='/logo.png' alt='nothing'/>
+          <img src='images/69787700-domino-wallpapers.jpg' alt='nothing'/>
         </Menu.Item>
 
         <Menu.Item

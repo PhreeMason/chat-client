@@ -7,9 +7,9 @@ const InputField = ({label, type, input, meta:{touched, error}}) => (
       <Input {...input} type={type}/>
       {touched && error && 
        <span className="error">
-	       <Label basic color='red' pointing>
-	         {error}
-	       </Label>
+           <Label basic color='red' pointing>
+             {error}
+           </Label>
        </span>}
     </div>
   )
