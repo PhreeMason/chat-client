@@ -20,13 +20,13 @@ export const signup = (user, router)=>{
 		dispatch(authenticationRequest())
 		return serverApi.createUser(user)
 		.then(body=>{
-			const slug = body.user.username
-			localStorage.setItem('token', body.token)
-			dispatch(setCurrentUser(body.user))
-			dispatch(reset('signup'))
-			router.history.replace(`/users/${slug}/profile`);
+	    const {user, token} = body.data
+			localStorage.setItem('token', token);
+			dispatch(setCurrentUser(user));
+			dispatch(reset('signup'));
+			router.history.replace(`/dominoRoom`);
 		})
-		.catch(err ={
+		.catch((err)=>{
 			throw new SubmissionError(err)
 		})
 	}
@@ -37,11 +37,11 @@ export const login = (user, router) => {
     dispatch(authenticationRequest()); 
     return serverApi.loginUser(user)
       .then(body => {
-        const { user, token } = body;
+        const { user, token } = body.data;
         localStorage.setItem('token', token);
         dispatch(setCurrentUser(user))
         dispatch(reset('login'));
-        router.history.replace(`/users/${user.username}/profile`);
+        router.history.replace(`/dominoRoom`);
       })
       .catch((err) => {
         throw new SubmissionError(err)
