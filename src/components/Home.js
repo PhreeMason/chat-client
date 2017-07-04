@@ -1,18 +1,25 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {signup, login} from '../redux/modules/Auth/actions'
 import { connect } from 'react-redux';
-import SignUpForm from '../components/SignUp'
-import LogIn from '../components/LogIn'
+import SignUpForm from './SignUp'
+import LogIn from './LogIn'
 import {Grid} from 'semantic-ui-react'
+import PropTypes from 'prop-types'
+import { withRouter } from 'react-router'
+
 
 class Home extends Component {
 
+  static propTypes ={
+    history: PropTypes.object.isRequired
+  }
+
   handleSignUp = (values) =>{
-    this.props.signup({user: values}, this.context.router)
+    this.props.signup({user: values}, this.props.history)
   }
 
   handleLogin = (values) =>{
-    this.props.login({user: values}, this.context.router)
+    this.props.login({user: values}, this.props.history)
   }
 
   render() {
@@ -29,4 +36,4 @@ class Home extends Component {
   }
 }
 
-export default connect(null, { login, signup })(Home);
+export default withRouter(connect(null, { login, signup })(Home));
