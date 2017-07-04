@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import NavBar from '../components/NavBar'
-import SignUp from '../components/SignUp'
+import Home from '../components/Home'
 
-const home = () => (<div>home</div>)
 const dominoRoom = () =>(<div>dominoRoom</div>)
 const NotFound = () =>(<h1>Wrong turn</h1>)
 
@@ -16,8 +15,7 @@ class App extends Component {
             <NavBar/>
           </div>
           <Switch>
-          <Route exact path="/" component={home} />
-          <Route exact path="/signup" component={SignUp} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/dominoRoom" component={dominoRoom} />
           <Route component={NotFound}/>
           </Switch>
