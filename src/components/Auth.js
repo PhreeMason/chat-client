@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 
 
-class Home extends Component {
+class Auth extends Component {
 
   static propTypes ={
     history: PropTypes.object.isRequired
@@ -36,4 +36,4 @@ class Home extends Component {
   }
 }
 
-export default withRouter(connect(null, { login, signup })(Home));
+export default withRouter(connect(null, { login, signup })(Auth));
