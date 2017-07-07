@@ -1,7 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form'
 import { Form } from 'semantic-ui-react'
-import InputField from '../containers/Input'
+import InputField from './Input'
 
 const SignUpFormFunc=(props)=>{
 	  return (
