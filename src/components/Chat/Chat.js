@@ -1,17 +1,13 @@
 import React from 'react';
+import {Grid} from 'semantic-ui-react'
 
 export default class Chat extends React.Component {
-  static propTypes = {
-    name: React.PropTypes.string,
-  };
-
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (
-      <div></div>
+      <Grid columns={3} padded>
+      	
+      </Grid>
     );
   }
 }
