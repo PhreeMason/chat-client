@@ -12,6 +12,7 @@
     "react-router-dom": "^4.1.1",
     "react-scripts": "1.0.10",
     "redux": "^3.7.1",
+    "redux-auth-wrapper": "^2.0.0-beta3",
     "redux-form": "^6.8.0",
     "redux-thunk": "^2.2.0",
     "semantic-ui-css": "^2.2.10",
