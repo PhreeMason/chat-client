@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const url = 'http://localhost:3001/api/v1';
 
-// const userToken =()=> {
-// 	const token  = localStorage.getItem('token');
-// 	return {'Authorization': `Bearer: ${token}`}
-// }
+const userToken =()=> {
+	const token  = localStorage.getItem('token');
+	return {'Authorization': `Bearer: ${token}`}
+}
 
 export default {
 	createUser(user){
@@ -14,6 +14,10 @@ export default {
 
 	loginUser(user){
 		return axios.post(`${url}/auth`, user)
+	},
+
+	auth(){
+		return axios.post(`${url}/auth/refresh`, {headers: userToken()})
 	}
 }
 
