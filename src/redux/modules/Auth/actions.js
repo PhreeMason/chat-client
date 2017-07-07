@@ -36,16 +36,17 @@ export const signup = (user, history)=>{
 		.then(body=>{
 	    if (body.errors) {
 	    	dispatch(authenticationFail)
-        history.push(`/`)      
+        console.error(body)
+        alert(body.errors.messages)
+        history.push(`/login`)      
 	    } else {
 		    const {user, token} = body.data
 				localStorage.setItem('token', token);
 				dispatch(setCurrentUser(user));
 				dispatch(reset('signup'));
-				history.push(`/dominoRoom`);
+				history.push(`/profile`);
 	    }
 		})
-	
 	}
 }
 
@@ -62,7 +63,9 @@ export const login = (user, history) => {
       })
       .catch((err) => {
         dispatch(authenticationFail)
-        history.push(`/`)
+        const errObj = new Error(err)
+        console.error(errObj)
+        return errObj
       })
   }
 }
