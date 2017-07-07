@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import NavBar from '../components/NavBar'
+import Profile from '../components/Profile'
 import Auth from '../components/Auth'
 import { StyleSheet, css } from 'aphrodite';
 import { userIsAuthenticated, authenticate, authenticationFail} from '../redux/modules/Auth/actions'
@@ -15,11 +16,10 @@ const styles = StyleSheet.create({
 const Games = () =>(<h1>Games</h1>)
 const NotFound = () =>(<h1>Wrong turn</h1>)
 const Home = ()=>(<h1>Home Page</h1>)
-const Pro=()=>(<h1>Profile Page</h1>)
 const Chats=()=>(<h1>Chat Page</h1>)
 const HomePage = userIsAuthenticated(Home)
 const Chat = userIsAuthenticated(Chats)
-const Profile= userIsAuthenticated(Pro)
+const Pro= userIsAuthenticated(Profile)
 const Game = userIsAuthenticated(Games)
 
 
@@ -45,7 +45,7 @@ class App extends Component {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/login" component={Auth} />
           <Route exact path="/chat" component={Chat} />
-          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/profile" component={Pro} />
           <Route exact path="/games" component={Game} />
           <Route component={NotFound}/>
           </Switch>
