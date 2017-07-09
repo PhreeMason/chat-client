@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 
 
+
 class Auth extends Component {
 
   static propTypes ={
@@ -21,7 +22,7 @@ class Auth extends Component {
   handleLogin = (values) =>{
     this.props.login({user: values}, this.props.history)
   }
-
+  
   render() {
     return (
      <Grid columns={2} padded>
