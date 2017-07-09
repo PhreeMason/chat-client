@@ -11,8 +11,18 @@ export default (state = initialState, action) => {
 	    }
 		  return {
 			 	status:'updated',
-	      chats: [...state.chatrooms, action.chatroom]
+	      chats: action.chats
 			}
+		case 'GETTING_CHATS':
+		  return {
+		  	...state,
+		  	status:'fetching chatrooms'
+		  }
+		case 'FAILED_GETTING_CHATS':
+		  return {
+		  	...state,
+		  	status: 'fetching failed'
+		  }
 		default:
 		  return state;
 	}
