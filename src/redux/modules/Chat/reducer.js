@@ -5,7 +5,7 @@ const initialState = {
 		messages: [],
 		chatroom_users: [],
 	},
-	status: 'fetched'
+	status: null
 }
 
 export default (state = initialState, action) => {

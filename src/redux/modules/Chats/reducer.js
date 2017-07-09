@@ -6,7 +6,7 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch(action.type){
 		case 'ADD_CHAT':
-			if (state.chats.filter(chatroom => chatroom.name === action.chatroom.name).length !== 0) {
+			if (state.chats.length === action.chats.length) {
 	      return state;
 	    }
 		  return {
