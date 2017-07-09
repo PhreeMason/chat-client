@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { Header, Image, Table } from 'semantic-ui-react'
+import { Header, Image, Table, Button } from 'semantic-ui-react'
 import Batman from '../../images/icons/Batman.svg'
 import Beach from '../../images/icons/Beach.svg'
 import Alien from '../../images/icons/Alien.svg'
 
-
 const images = [Batman, Beach, Alien]
 
-const ChatList = ({chats}) => {  
+const ChatList = (props) => {  
   return (
     <Table basic='very' celled collapsing>
       <Table.Header>
@@ -18,8 +17,8 @@ const ChatList = ({chats}) => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {chats.map((chat, idx) => 
-          <Table.Row>
+        {props.chats.map((chat, idx) => 
+          <Table.Row key={idx}>
             <Table.Cell>
               <Header as='h4' image>
                 <Image src={images[idx]} size='mini' />
@@ -29,7 +28,11 @@ const ChatList = ({chats}) => {
               </Header>
             </Table.Cell>
             <Table.Cell>
-              {chat.chatroom_users.length}
+              <Button
+              color='black' 
+              content={chat.chatroom_users.length} 
+              icon='angle right' labelPosition='right' 
+              onClick={()=>props.handleClick(chat)} />
             </Table.Cell>
           </Table.Row>
         )}
@@ -43,6 +46,3 @@ ChatList.propTypes = {
 };
 
 export default ChatList
-
-
-
