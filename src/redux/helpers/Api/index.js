@@ -18,6 +18,11 @@ export default {
 
 	auth(){
 		return axios.post(`${url}/auth/refresh`, {headers: userToken()})
+	},
+
+	getChats(){
+		console.log('inside the get')
+		return axios.get(`${url}/chatrooms`)
 	}
 }
 
