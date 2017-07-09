@@ -7,7 +7,7 @@ class Profile extends React.Component {
   	const {user} = this.props
     return (
       <div>
-        <h1>Welcome {user.username} </h1>
+        <h1>Welcome {user.username}</h1>
       </div>
     );
   }

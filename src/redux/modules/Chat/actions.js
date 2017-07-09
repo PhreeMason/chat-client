@@ -1,1 +1,7 @@
-actions.js
+import serverApi from '../../helpers/Api'
+
+
+
+export const joinChat=(chat)=>{
+
+}

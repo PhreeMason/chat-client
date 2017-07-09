@@ -75,7 +75,7 @@ export const authenticate = () => {
     dispatch(authenticationRequest());
     return serverApi.auth()
       .then(response => {
-        const { user, token } = response;
+        const { user, token } = response.data;
         localStorage.setItem('token', token);
         dispatch(setCurrentUser(user));
       })
