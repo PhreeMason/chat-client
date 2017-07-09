@@ -1,7 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import ChatPage from '../Chat/ChatsPage'
-
 
 class Profile extends React.Component {
  
@@ -10,7 +8,6 @@ class Profile extends React.Component {
     return (
       <div>
         <h1>Welcome {user.username} </h1>
-        <ChatPage/>
       </div>
     );
   }

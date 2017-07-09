@@ -42,7 +42,7 @@ class NavBar extends Component {
 	          </Menu.Item>
 
 	          <Menu.Item
-	            as={ Link } to='/chat' 
+	            as={ Link } to='/chats' 
 	            name='chat' 
 	            active={activeItem === 'chat'} 
 	            onClick={this.handleItemClick}
