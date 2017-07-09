@@ -21,7 +21,6 @@ export default {
 	},
 
 	getChats(){
-		console.log('inside the get')
 		return axios.get(`${url}/chatrooms`)
 	}
 }

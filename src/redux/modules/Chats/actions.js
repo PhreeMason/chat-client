@@ -1,9 +1,9 @@
 import serverApi from '../../helpers/Api'
 
-export const addChat=(chatroom)=>{
+export const addChat=(chats)=>{
   return {
   	type: 'ADD_CHAT',
-  	chatroom
+  	chats
   }
 }
 
@@ -11,18 +11,23 @@ export const gettingChats=()=>{
   return{type: 'GETTING_CHATS'}
 }
 
+export const getChatsFailed=()=>{
+  return{type: 'FAILED_GETTING_CHATS'}
+}
 
-export const getChats=()=>{
-  console.log('inside the dispatch')
-  return dispatch=>{
-  	return serverApi.getChats()
-  	.then(body=>{
-      console.log('thebody goes here')
-  		console.log(body)
-  	})
-    .catch(err=>{
-      console.error('the errors go here')
-      console.error(err)
+export const getChats =()=>{
+  return dispatch => {
+    dispatch(gettingChats())
+    return serverApi.getChats()
+    .then(body=>{
+      if (body.errors) {
+        dispatch(getChatsFailed)
+        alert('Failed to load chats')
+        return body.errors    
+      } else {
+        const chats = body.data
+        dispatch(addChat(chats));
+      }
     })
   }
 }
