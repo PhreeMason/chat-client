@@ -8,21 +8,12 @@ import ChatShow from './ChatShow'
 
 class ChatPage extends React.Component {
   
-  constructor(props) {
-    super(props);
-    this.state={
-      currentChat: null
-    }
-  }
-
   componentDidMount() {
     this.props.getChats()
   }
 
   handleClick=(chat)=>{
-    this.setState({
-      currentChat: chat
-    })
+    alert('work in progress')
   }
 
   render() {
@@ -33,8 +24,8 @@ class ChatPage extends React.Component {
           <ChatList chats={this.props.chats} handleClick={this.handleClick} />
         </Grid.Column>
         <Grid.Column>
-          {this.state.currentChat !== null ? 
-            <ChatShow chat={this.state.currentChat}/>
+          {this.props.currentChat.status !== null? 
+            <ChatShow chat={this.props.currentChat.chatroom}/>
             : null}
         </Grid.Column> 
       </Grid>
@@ -50,7 +41,8 @@ ChatPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-  	chats: state.chats.chats
+  	chats: state.chats.chats,
+    currentChat: state.chat
   }
 } 
 

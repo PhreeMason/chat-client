@@ -29,7 +29,7 @@ const ChatList = (props) => {
             </Table.Cell>
             <Table.Cell>
               <Button
-              color='black' 
+              inverted color='orange' 
               content={chat.chatroom_users.length} 
               icon='angle right' labelPosition='right' 
               onClick={()=>props.handleClick(chat)} />
