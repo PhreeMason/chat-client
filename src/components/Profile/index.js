@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux'
+import ChatPage from '../Chat/ChatsPage'
 
 
 class Profile extends React.Component {
@@ -7,7 +8,10 @@ class Profile extends React.Component {
   render() {
   	const {user} = this.props
     return (
-      <h1>Welcome {user.username} </h1>
+      <div>
+        <h1>Welcome {user.username} </h1>
+        <ChatPage/>
+      </div>
     );
   }
 }

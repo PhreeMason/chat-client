@@ -28,7 +28,7 @@ class NavBar extends Component {
     return (
       <Menu stackable inverted>
         <Menu.Item>
-          <img src={smash} alt='nothing'/>
+          <img src={smash} alt='logo'/>
         </Menu.Item>
         {isAuthenticated?
 	        <Menu.Menu>      
