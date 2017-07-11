@@ -2,6 +2,7 @@ import { reset } from'redux-form'
 import serverApi from '../../helpers/Api'
 import { connectedRouterRedirect } from 'redux-auth-wrapper/history4/redirect'
 import Loading from '../../../components/Loading'
+import {errorHandler} from '../Error/actions'
 
 export const authenticationRequest = () =>{
 	return {
@@ -36,9 +37,7 @@ export const signup = (user, history)=>{
 		.then(body=>{
 	    if (body.errors) {
 	    	dispatch(authenticationFail)
-        console.error(body)
-        alert(body.errors.messages)
-        history.push(`/login`)      
+        errorHandler(body,dispatch)      
 	    } else {
 		    const {user, token} = body.data
 				localStorage.setItem('token', token);
@@ -63,9 +62,7 @@ export const login = (user, history) => {
       })
       .catch((err) => {
         dispatch(authenticationFail)
-        const errObj = new Error(err)
-        console.error(errObj)
-        return errObj
+        return errorHandler(err, dispatch)
       })
   }
 }

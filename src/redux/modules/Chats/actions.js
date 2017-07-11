@@ -1,8 +1,9 @@
 import serverApi from '../../helpers/Api'
+import {errorHandler} from '../Error/actions'
 
 export const addChat=(chats)=>{
   return {
-  	type: 'ADD_CHAT',
+  	type: 'ADD_CHATS',
   	chats
   }
 }
@@ -22,7 +23,7 @@ export const getChats =()=>{
     .then(body=>{
       if (body.errors) {
         dispatch(getChatsFailed)
-        alert('Failed to load chats')
+        errorHandler(body, dispatch)
         return body.errors    
       } else {
         const chats = body.data

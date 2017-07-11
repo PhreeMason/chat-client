@@ -5,7 +5,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
 	switch(action.type){
-		case 'ADD_CHAT':
+		case 'ADD_CHATS':
 			if (state.chats.length === action.chats.length) {
 	      return state;
 	    }
