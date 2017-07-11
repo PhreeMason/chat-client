@@ -30,6 +30,10 @@ export default {
   leaveChat(chatroom_id){
 		return axios.delete(`${url}/chatrooms/${chatroom_id}/chatroom_users`)
 	},
+
+	setChat(chatroom_id){
+    
+	},
 }
 
 
