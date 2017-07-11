@@ -26,7 +26,7 @@ class NavBar extends Component {
     const { activeItem } = this.state
     const {isAuthenticated} = this.props
     return (
-      <Menu stackable inverted>
+      <Menu inverted>
         <Menu.Item>
           <img src={smash} alt='logo'/>
         </Menu.Item>
