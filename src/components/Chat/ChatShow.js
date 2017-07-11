@@ -1,10 +1,22 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import {Grid} from 'semantic-ui-react'
 
-export default class ChatShow extends React.Component {
+const ChatShow =({chat})=> {
+  return (
+  	<Grid.Column>
+  	  {chat.name || 'Something went wrong'}
+    </Grid.Column> 
+  );
+}
 
-  render() {
-    return (
-      <div>{this.props.chat.name || 7}</div>
-    );
+const mapStateToProps = (state, ownProps) => {
+  const chat = state.chat.chatroom
+  if (chat.id===ownProps.match.params.chatId) {
+    return { chat }
+  } else {
+    return { chat: {} }
   }
 }
+
+export default connect(mapStateToProps)(ChatShow);
