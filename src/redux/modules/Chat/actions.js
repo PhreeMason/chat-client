@@ -1,31 +1,47 @@
 import serverApi from '../../helpers/Api'
 import {errorHandler} from '../Error/actions'
 
-export const getChat=()=>({type: 'GET_CHATROOM'})
+export const getChat = () =>({type: 'GETTING_CHATROOM'})
 
-export const getChatSuccess=(chat)=>{
+export const getChatSuccess = (chat) =>{
   return {
     type: 'GET_CHATROOM_SUCCESS',
-    chatroom: chat
+    chat: chat
   }
 }
 
-export const setCurrentChat=(chat)=>{
+export const sendingMessage = () => ({type: 'SENDING_MESSAGE'})
+
+export const setCurrentChat = (id) =>{
   return dispatch =>{
     dispatch(getChat())
-    return serverApi.setChat(1)
+    return serverApi.joinChat(id)
+    .then(body=>{
+      dispatch(getChatSuccess(body.data))
+    })
+    .catch(err=>{
+      errorHandler(err, dispatch)
+    })
   }
 }
 
-export const joinChat=(chat)=>{
+const addMessage = (message) =>{
+  return {
+    type: 'ADD_MESSAGE',
+    message: message
+  }
+}
+
+export const sendMessage = (room_id, message) =>{
   return dispatch =>{
-  	dispatch(getChat())
-  	return serverApi.joinChat(1)
-  	.then(body=>{
-      console.log(body)
-  	})
-  	.catch(err=>{
-  		errorHandler(err, dispatch)
-  	})
+    dispatch(sendingMessage())
+    return serverApi.sendMessage(room_id, message)
+    .then(body=>{
+      console.log('addind message', body.data)
+      dispatch(addMessage(body.data))
+    })
+    .catch(err=>{
+      errorHandler(err, dispatch)
+    })
   }
 }

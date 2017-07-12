@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const url = 'http://localhost:3001/api/v1';
 
-const token  = localStorage.getItem('token');
+const token = () => localStorage.getItem('token');
 
-axios.defaults.headers.common['Authorization'] = token
+axios.defaults.headers.common['Authorization'] = token()
 
 export default {
 	createUser(user){
@@ -31,9 +31,9 @@ export default {
 		return axios.delete(`${url}/chatrooms/${chatroom_id}/chatroom_users`)
 	},
 
-	setChat(chatroom_id){
-    
-	},
+	sendMessage(chatroom_id, body){
+		return axios.post(`${url}/chatrooms/${chatroom_id}/messages`, {chatroom_id, body})
+	}
 }
 
 
