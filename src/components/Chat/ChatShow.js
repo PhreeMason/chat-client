@@ -1,22 +1,44 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Grid} from 'semantic-ui-react'
+import { setCurrentChat, sendMessage } from '../../redux/modules/Chat/actions' 
+import ChatInput from './ChatInput'
+import MessageShow from './MessageShow'
+import Loading from '../Loading'
+class ChatShow extends React.Component {
+  componentDidMount() {
+    const {setCurrentChat, match} = this.props
+    setCurrentChat(match.params.chatId)
+  }
+ 
+  handleSubmit=(body)=>{
+    const { chatroom } = this.props.chat
+    this.props.sendMessage(chatroom.id, body)
+  }
 
-const ChatShow =({chat})=> {
-  return (
-  	<Grid.Column>
-  	  {chat.name || 'Something went wrong'}
-    </Grid.Column> 
-  );
-}
 
-const mapStateToProps = (state, ownProps) => {
-  const chat = state.chat.chatroom
-  if (chat.id===ownProps.match.params.chatId) {
-    return { chat }
-  } else {
-    return { chat: {} }
+
+  render() {
+    const { chatroom } = this.props.chat
+    return (
+      <Grid.Column>
+        {chatroom.name ? 
+         <div>
+           <h3>{chatroom.name}</h3>
+           <MessageShow messages={chatroom.messages} />  
+         </div>
+        : <Loading/> }
+        <ChatInput handleSubmit={this.handleSubmit}/>
+      </Grid.Column> 
+    );
   }
 }
 
-export default connect(mapStateToProps)(ChatShow);
+
+const mapStateToProps = (state) => {
+  return {
+    chat: state.chat
+  }
+}
+
+export default connect(mapStateToProps, { setCurrentChat, sendMessage })(ChatShow);
