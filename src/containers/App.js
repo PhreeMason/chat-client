@@ -57,7 +57,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    errors: state.errors.errors
+    errors: state.errors
   }
 }
 
