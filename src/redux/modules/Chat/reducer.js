@@ -1,16 +1,16 @@
 const initialState = {
 	chatroom:{
 		id: '',
-		name: '',
-		messages: [],
-		chatroom_users: [],
+	  name: '',
+	  messages: []
 	},
+	chatroom_users: [],
 	status: null
 }
 
 export default (state = initialState, action) => {
 	switch(action.type){
-		case 'GET_CHATROOM':
+		case 'GETTING_CHATROOM':
 		  return {
 			 	...state,
 	      status: 'fetching'
@@ -22,8 +22,22 @@ export default (state = initialState, action) => {
       } 
     case 'GET_CHATROOM_SUCCESS':
       return {
-      	chatroom: action.chatroom, 
-      	status: 'all good'
+      	...action.chat, 
+      	status: 'fetched'
+      }
+    case 'SENDING_MESSAGE':
+      return {
+      	...state,
+      	status: 'updating'
+      }
+    case 'ADD_MESSAGE':
+      return {
+			  ...state,
+			  chatroom:{
+			    ...state.chatroom,
+			    messages: [...state.chatroom.messages, action.message]
+			  },
+			  status: 'updated'
       }
 		default:
 		  return state;
