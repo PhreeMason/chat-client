@@ -1,11 +1,16 @@
-import React from 'react';
+import React from 'react'
+import { Dimmer, Loader, Image, Segment } from 'semantic-ui-react'
+import purpleDomino from '../images/purpleDomino.jpg'
 
-export default class Loading extends React.Component {
+const Loading = () => (
+  <div>
+    <Segment>
+      <Dimmer active inverted>
+        <Loader inverted>Loading</Loader>
+      </Dimmer>
+      <Image src={purpleDomino} />
+    </Segment>
+  </div>
+)
 
-
-  render() {
-    return (
-      <div>Loading...</div>
-    );
-  }
-}
+export default Loading
