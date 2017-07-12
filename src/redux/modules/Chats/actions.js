@@ -4,7 +4,7 @@ import {errorHandler} from '../Error/actions'
 export const addChat=(chats)=>{
   return {
   	type: 'ADD_CHATS',
-  	chats
+  	chats: chats
   }
 }
 

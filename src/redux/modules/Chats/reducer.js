@@ -6,9 +6,6 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch(action.type){
 		case 'ADD_CHATS':
-			if (state.chats.length === action.chats.length) {
-	      return state;
-	    }
 		  return {
 			 	status:'updated',
 	      chats: action.chats
