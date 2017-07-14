@@ -4,16 +4,16 @@ import NavBar from '../components/NavBar'
 import Profile from '../components/Profile'
 import Auth from '../components/Auth'
 import {ErrorShow} from './ErrorShow'
-// import { StyleSheet, css } from 'aphrodite';
 import { userIsAuthenticated, authenticate, authenticationFail} from '../redux/modules/Auth/actions'
 import {connect} from 'react-redux'
-import ChatsPage from '../components/Chat'
+import ChatContainer from './ChatContainer'
+
 // const styles = StyleSheet.create({
 //     red: {
 //         backgroundImage: 'linear-gradient( 135deg, #F05F57 0%, #360940 100%);'
 //     }
 // });
-
+const Chats = userIsAuthenticated(ChatContainer)
 const Games = () =>(<h1>Games</h1>)
 const NotFound = () =>(<h1>Wrong turn</h1>)
 const Home = ()=>(<h1>Home Page</h1>)
@@ -33,7 +33,7 @@ class App extends Component {
     }
   }
   render() {
-    const {errors} = this.props
+    const {errors, apiCable} = this.props
     return (
       <Router>
         <div>
@@ -44,7 +44,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={Auth} />
-            <Route path="/chats" component={userIsAuthenticated(ChatsPage)} />
+            <Route path="/chats" render={(props)=> <Chats {...props} apiCable={apiCable}/> }/>
             <Route path="/profile" component={Pro} />
             <Route path="/games" component={Game} />
             <Route component={NotFound}/>
