@@ -9,4 +9,3 @@ export const ErrorShow = (props) => (
 	  </ul>
   </Message>
 )
-
