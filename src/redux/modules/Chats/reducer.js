@@ -20,6 +20,10 @@ export default (state = initialState, action) => {
 		  	...state,
 		  	status: 'fetching failed'
 		  }
+		case 'ADD_MESSAGE':
+		  return{
+		  	stutus: 'updated'
+		  }
 		default:
 		  return state;
 	}

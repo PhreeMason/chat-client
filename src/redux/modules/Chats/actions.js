@@ -16,6 +16,13 @@ export const getChatsFailed=()=>{
   return{type: 'FAILED_GETTING_CHATS'}
 }
 
+const addMessage = (message) =>{
+  return {
+    type: 'ADD_MESSAGE',
+    message: message
+  }
+}
+
 export const getChats =()=>{
   return dispatch => {
     dispatch(gettingChats())
@@ -26,7 +33,7 @@ export const getChats =()=>{
         errorHandler(body, dispatch)
         return body.errors    
       } else {
-        const chats = body.data
+        const chats = body.data.chatrooms
         dispatch(addChat(chats));
       }
     })
