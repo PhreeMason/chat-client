@@ -20,19 +20,19 @@ export default {
 	},
 
 	getChats(){
-		return axios.get(`${url}/chatrooms`)
+		return axios.get(`${url}/chatrooms.json`)
 	},
 
 	joinChat(chatroom_id){
-		return axios.post(`${url}/chatrooms/${chatroom_id}/chatroom_users`)
+		return axios.post(`${url}/chatrooms/${chatroom_id}/chatroom_users.json`)
 	},
 
   leaveChat(chatroom_id){
-		return axios.delete(`${url}/chatrooms/${chatroom_id}/chatroom_users`)
+		return axios.delete(`${url}/chatrooms/${chatroom_id}/chatroom_users.json`)
 	},
 
 	sendMessage(chatroom_id, body){
-		return axios.post(`${url}/chatrooms/${chatroom_id}/messages`, {chatroom_id, body})
+		return axios.post(`${url}/chatrooms/${chatroom_id}/messages.json`, {chatroom_id, body})
 	}
 }
 
