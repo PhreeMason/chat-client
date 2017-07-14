@@ -5,7 +5,7 @@ import purpleDomino from '../images/purpleDomino.jpg'
 const Loading = () => (
   <div>
     <Segment>
-      <Dimmer active inverted>
+      <Dimmer active>
         <Loader inverted>Loading</Loader>
       </Dimmer>
       <Image src={purpleDomino} />
