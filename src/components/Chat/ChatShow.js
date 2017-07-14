@@ -5,27 +5,54 @@ import { setCurrentChat, sendMessage } from '../../redux/modules/Chat/actions'
 import ChatInput from './ChatInput'
 import MessageShow from './MessageShow'
 import Loading from '../Loading'
+import PropTypes from 'prop-types'
+
 class ChatShow extends React.Component {
+  constructor() {
+    super();
+    this.state ={
+      currentChat:{
+        messages:[]
+      } 
+    }
+  }
+
   componentDidMount() {
-    const {setCurrentChat, match} = this.props
-    setCurrentChat(match.params.chatId)
+    setTimeout(()=>this.setChat(this.props.match), 1500)
   }
  
   handleSubmit=(body)=>{
-    const { chatroom } = this.props.chat
-    this.props.sendMessage(chatroom.id, body)
+    const {id} = this.state.currentChat
+    const message = {chatroom_id: id, body: body}
+    this.props.apiCable.messenger.perform("send_message", message)
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setChat(nextProps.match)
+  }
+
+  setChat =(match)=>{
+    const currentRoom = this.props.chats.find(room=>{
+      return room.id === parseInt(match.params.chatId, 10)
+    })
+
+    if (currentRoom) {
+      this.setState({
+        currentChat: currentRoom
+      })
+    }
+  }
+ 
 
 
   render() {
-    const { chatroom } = this.props.chat
+    const { currentChat } = this.state
     return (
       <Grid.Column>
-        {chatroom.name ? 
+        {currentChat.name ?
          <div>
-           <h3>{chatroom.name}</h3>
-           <MessageShow messages={chatroom.messages} />  
+           <h3>{currentChat.name}</h3>
+           <MessageShow messages={currentChat.messages} />  
          </div>
         : <Loading/> }
         <ChatInput handleSubmit={this.handleSubmit}/>
@@ -34,11 +61,9 @@ class ChatShow extends React.Component {
   }
 }
 
+ChatShow.propTypes = {  
+  chats: PropTypes.array.isRequired,
+  apiCable: PropTypes.object.isRequired
+};
 
-const mapStateToProps = (state) => {
-  return {
-    chat: state.chat
-  }
-}
-
-export default connect(mapStateToProps, { setCurrentChat, sendMessage })(ChatShow);
+export default connect(null, { setCurrentChat, sendMessage })(ChatShow);
