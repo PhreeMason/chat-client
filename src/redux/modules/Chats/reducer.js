@@ -20,9 +20,10 @@ export default (state = initialState, action) => {
 		  	...state,
 		  	status: 'fetching failed'
 		  }
-		case 'ADD_MESSAGE':
-		  return{
-		  	stutus: 'updated'
+		case 'ENTER_CHAT':
+		  return {
+		  	status: 'updated',
+		  	chats:[...state.chats, action.chat]
 		  }
 		default:
 		  return state;
