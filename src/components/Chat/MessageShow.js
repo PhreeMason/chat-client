@@ -1,5 +1,5 @@
 import React from 'react';
-import {List} from 'semantic-ui-react'
+import {List, Divider} from 'semantic-ui-react'
 import { StyleSheet, css } from 'aphrodite';
 
 const sheet = StyleSheet.create({
@@ -10,10 +10,10 @@ const sheet = StyleSheet.create({
 })
 
 const MessageShow = ({messages}) =>{
-  // const messagesList = document.getElementByClassName('messages_5iovkz');
-  // setTimeout((messagesList) => {
-  //   messagesList.scrollTop = messagesList.scrollHeight;
-  // }, 1500)
+  setTimeout(() => {
+    const messageBox = document.getElementsByClassName('messages_5iovkz')
+    messageBox.scrollTop = messageBox.scrollHeight;
+  }, 1000)
   return (
     <div className={css(sheet.messages)}>
       <List>
@@ -26,6 +26,7 @@ const MessageShow = ({messages}) =>{
            </List.Item>
         )}
       </List>
+      <Divider />
     </div>
   );
 }
