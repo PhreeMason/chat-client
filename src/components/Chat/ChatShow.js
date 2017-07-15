@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import {Grid} from 'semantic-ui-react'
-import { setCurrentChat, sendMessage } from '../../redux/modules/Chat/actions' 
 import ChatInput from './ChatInput'
 import MessageShow from './MessageShow'
 import Loading from '../Loading'
@@ -11,34 +9,31 @@ class ChatShow extends React.Component {
   constructor() {
     super();
     this.state ={
-      currentChat:{
-        messages:[]
-      } 
+      messages:[]
     }
   }
 
   componentDidMount() {
-    setTimeout(()=>this.setChat(this.props.match), 1500)
+    setTimeout(()=>this.setMessages(this.props), 1500)
   }
  
   handleSubmit=(body)=>{
-    const {id} = this.state.currentChat
-    const message = {chatroom_id: id, body: body}
+    const message = {chatroom_id: this.props.match.params.chatId, body: body}
     this.props.apiCable.messenger.perform("send_message", message)
   }
 
+
   componentWillReceiveProps(nextProps) {
-    this.setChat(nextProps.match)
+    this.setMessages(nextProps)
   }
 
-  setChat =(match)=>{
-    const currentRoom = this.props.chats.find(room=>{
-      return room.id === parseInt(match.params.chatId, 10)
-    })
+  setMessages =(props)=>{
+    const currentId = parseInt(props.match.params.chatId, 10)
+    const currentMessages = props.messages[currentId]
 
-    if (currentRoom) {
+    if (currentMessages) {
       this.setState({
-        currentChat: currentRoom
+        messages: currentMessages
       })
     }
   }
@@ -46,15 +41,11 @@ class ChatShow extends React.Component {
 
 
   render() {
-    const { currentChat } = this.state
+    const { messages, loading } = this.state
     return (
       <Grid.Column>
-        {currentChat.name ?
-         <div>
-           <h3>{currentChat.name}</h3>
-           <MessageShow messages={currentChat.messages} />  
-         </div>
-        : <Loading/> }
+        <MessageShow messages={messages} />  
+          
         <ChatInput handleSubmit={this.handleSubmit}/>
       </Grid.Column> 
     );
@@ -62,8 +53,8 @@ class ChatShow extends React.Component {
 }
 
 ChatShow.propTypes = {  
-  chats: PropTypes.array.isRequired,
+  messages: PropTypes.object.isRequired,
   apiCable: PropTypes.object.isRequired
 };
 
-export default connect(null, { setCurrentChat, sendMessage })(ChatShow);
+export default ChatShow;
