@@ -8,12 +8,14 @@ import {reducer as form } from 'redux-form'
 import auth from '../modules/Auth/reducer'
 import chats from '../modules/Chats/reducer'
 import errors from '../modules/Error/reducer'
+import messages from '../modules/Messages/reducer'
 
 const reducers = combineReducers({
-	form,
 	auth,
 	chats,
-	errors
+	errors,
+	form,
+	messages
 })
 
 const middleware = [thunk]
