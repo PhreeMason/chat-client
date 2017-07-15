@@ -1,6 +1,5 @@
 import React from 'react'
 import { Header, Image, Table, Button } from 'semantic-ui-react'
-import { Link } from 'react-router-dom'
 import Batman from '../../images/icons/Batman.svg'
 import Beach from '../../images/icons/Beach.svg'
 import Alien from '../../images/icons/Alien.svg' 
@@ -40,7 +39,7 @@ const ChatList = (props) =>{
               </Table.Cell>
               <Table.Cell>
                 <Button
-                as={ Link } to={`/chats/${chat.id}/${chat.name.replace(/ /g, "-")}`}
+                onClick={()=>props.handleClick(chat)}
                 inverted color='orange' 
                 content={chat.members} 
                 icon='angle right' labelPosition='right' 
