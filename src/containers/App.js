@@ -5,6 +5,7 @@ import Profile from '../components/Profile'
 import Auth from '../components/Auth'
 import {ErrorShow} from './ErrorShow'
 import { userIsAuthenticated, authenticate, authenticationFail} from '../redux/modules/Auth/actions'
+import {clearErrors} from '../redux/modules/Error/actions'
 import {connect} from 'react-redux'
 import ChatContainer from './ChatContainer'
 
@@ -33,14 +34,14 @@ class App extends Component {
     }
   }
   render() {
-    const {errors, apiCable} = this.props
+    const {errors, apiCable, clearErrors} = this.props
     return (
       <Router>
         <div>
           <div className="navbar">
             <NavBar/>
           </div>
-          {errors.length ? <ErrorShow errors={errors}/> : null}
+          {errors.length ? <ErrorShow clearErrors={clearErrors}errors={errors}/> : null}
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/login" component={Auth} />
@@ -61,4 +62,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { userIsAuthenticated, authenticate, authenticationFail})(App);
+export default connect(mapStateToProps, { clearErrors, userIsAuthenticated, authenticate, authenticationFail})(App);

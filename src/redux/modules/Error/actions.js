@@ -1,10 +1,18 @@
-export const serverDown = () => ({type: 'NO_RESPONSE'})
+const serverDown = () => ({type: 'NO_RESPONSE'})
 
 export const serverError = (errors) => {
 	return {
 		type: 'SERVER_ERROR',
 		errors
 	}
+}
+
+const emptyErrors = ()=> ({type: 'NO_ERRORS'})
+
+export const clearErrors =() =>{
+  return dispatch =>{
+    dispatch(emptyErrors())
+  }
 }
 
 export const errorHandler = (error, dispatch) =>{
@@ -22,7 +30,7 @@ function logIT(errors) {
 	var results = []
   for (var k in errors){
     if (errors.hasOwnProperty(k)) {
-        results = [...results, errors[k]];
+        results = [...results, `${k}: ${errors[k]}`];
     }
   }
   return results
