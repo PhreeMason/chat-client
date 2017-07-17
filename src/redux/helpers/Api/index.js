@@ -27,12 +27,20 @@ export default {
 		return axios.post(`${url}/chatrooms/${chatroom_id}/chatroom_users.json`)
 	},
 
+	createChat(params){
+		return axios.post(`${url}/chatrooms.json`, {chatroom: params})
+	},
+
   leaveChat(chatroom_id){
 		return axios.delete(`${url}/chatrooms/${chatroom_id}/chatroom_users.json`)
 	},
 
 	sendMessage(chatroom_id, body){
 		return axios.post(`${url}/chatrooms/${chatroom_id}/messages.json`, {chatroom_id, body})
+	},
+
+	directMessage(username){
+		return axios.post(`${url}/chatrooms/direct_message.json`, {user: username})
 	}
 }
 

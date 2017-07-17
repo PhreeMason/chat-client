@@ -2,7 +2,6 @@ import serverApi from '../../helpers/Api'
 import {errorHandler} from '../Error/actions'
 import {addMessages} from '../Messages/actions'
 
-
 export const addChat=(chats)=>{
   return {
   	type: 'ADD_CHATS',
@@ -43,17 +42,30 @@ export const getChats =()=>{
   }
 }
 
-export const joinChat =(chat_id)=>{
+export const createChat =(params)=>{
   return dispatch =>{
-  dispatch(gettingChats())
-  return serverApi.joinChat(chat_id)
-    .then(body => {
-      console.log(body)
-      // dispatch(enterChat(body.chatroom))
-    })
-    .catch((err) => {
-      dispatch(getChatsFailed)
-      return errorHandler(err, dispatch)
-    })
+    dispatch(gettingChats())
+    return serverApi.createChat(params)
+      .then(body => {
+        getChats(dispatch)
+      })
+      .catch((err) => {
+        dispatch(getChatsFailed)
+        errorHandler(err, dispatch)
+      })
   } 
+}
+
+export const directMessage = (username) =>{
+  return dispatch =>{
+    dispatch(gettingChats())
+    return serverApi.directMessage(username)
+      .then(body=>{
+        getChats(dispatch)
+      })
+      .catch(err=>{
+        dispatch(getChatsFailed)
+        errorHandler(err, dispatch)
+      })
+  }
 }

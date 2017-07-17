@@ -4,7 +4,8 @@ import ChatInput from './ChatInput'
 import MessageShow from './MessageShow'
 import Loading from '../Loading'
 import PropTypes from 'prop-types'
-
+import {directMessage} from '../../redux/modules/Chats/actions'
+import {connect} from 'react-redux'
 class ChatShow extends React.Component {
   constructor() {
     super();
@@ -12,17 +13,16 @@ class ChatShow extends React.Component {
       messages:[]
     }
   }
-
+  
   componentDidMount() {
-    setTimeout(()=>this.setMessages(this.props), 1500)
-  }
- 
+    setTimeout(()=>this.setMessages(this.props), 500)
+  } 
+
   handleSubmit=(body)=>{
     const message = {chatroom_id: this.props.match.params.chatId, body: body}
     this.props.apiCable.messenger.perform("send_message", message)
   }
-
-
+  
   componentWillReceiveProps(nextProps) {
     this.setMessages(nextProps)
   }
@@ -38,14 +38,11 @@ class ChatShow extends React.Component {
     }
   }
  
-
-
   render() {
-    const { messages, loading } = this.state
+    const { messages } = this.state
     return (
-      <Grid.Column>
-        <MessageShow messages={messages} />  
-          
+      <Grid.Column width={10}>
+        {messages.length? <MessageShow username={this.props.currentUsername} messages={messages} dM={this.props.directMessage}/> : <Loading/>}   
         <ChatInput handleSubmit={this.handleSubmit}/>
       </Grid.Column> 
     );
@@ -57,4 +54,4 @@ ChatShow.propTypes = {
   apiCable: PropTypes.object.isRequired
 };
 
-export default ChatShow;
+export default connect(null, {directMessage})(ChatShow);
