@@ -1,34 +1,53 @@
 import React from 'react';
-import {List, Divider} from 'semantic-ui-react'
-import { StyleSheet, css } from 'aphrodite';
+import { Segment, Button, Grid, Popup} from 'semantic-ui-react'
+import { StyleSheet, css  } from 'aphrodite';
 
 const sheet = StyleSheet.create({
   messages:{
-    height: '300px',
+    height: '600px',
     overflowY: 'scroll'
   }
 })
 
-const MessageShow = ({messages}) =>{
+const linkUser = (username, dM) => (
+  <Popup wide trigger={<strong>{username}</strong>} on='click'>
+    <Grid divided columns='equal'>
+      <Grid.Column>
+        <Popup
+          trigger={<Button icon='talk' onClick={()=>dM({username: username})} />}
+          content='Message'
+        />
+      </Grid.Column>
+      <Grid.Column>
+        <Popup
+          trigger={<Button icon='user' />}
+          content='Profile'
+        />
+      </Grid.Column>
+    </Grid>
+  </Popup>
+)
+
+const MessageShow = ({dM, messages, username}) =>{
   setTimeout(() => {
-    const messageBox = document.getElementsByClassName('messages_5iovkz')
-    messageBox.scrollTop = messageBox.scrollHeight;
-  }, 1000)
+    const messageBox = document.getElementsByClassName('messages_gqcvba')
+    messageBox["0"].scrollTop = messageBox["0"].scrollHeight;
+  }, 250)
   return (
     <div className={css(sheet.messages)}>
-      <List>
-        {messages.map((message, i) => 
-           <List.Item key={i}>
-              <List.Content>
-                <List.Header>{message.user_name}</List.Header>
-                <List.Description>{message.body}</List.Description>
-              </List.Content>
-           </List.Item>
-        )}
-      </List>
-      <Divider />
+      {messages.map((message, i) =>
+        <Segment key={i} raised
+          color={username === message.user_name ?'red':'teal'}
+          textAlign={username === message.user_name ?'right':'left'}> 
+          {username === message.user_name ? null : linkUser(message.user_name, dM)}
+          <p>{message.body}</p>
+        </Segment>
+      )}
     </div>
   );
 }
 
 export default MessageShow
+
+
+
