@@ -35,17 +35,16 @@ export const signup = (user, history)=>{
 		dispatch(authenticationRequest())
 		return serverApi.createUser(user)
 		.then(body=>{
-	    if (body.errors) {
-	    	dispatch(authenticationFail)
-        errorHandler(body,dispatch)      
-	    } else {
-		    const {user, token} = body.data
-				localStorage.setItem('token', token);
-				dispatch(setCurrentUser(user));
-				dispatch(reset('signup'));
-				history.push(`/profile`);
-	    }
+	      const {user, token} = body.data
+        localStorage.setItem('token', token);
+        dispatch(setCurrentUser(user));
+        dispatch(reset('signup'));
+        history.push(`/profile`);    
 		})
+    .catch(error=>{
+      dispatch(authenticationFail)
+      errorHandler(error,dispatch)
+    })
 	}
 }
 
