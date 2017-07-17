@@ -1,9 +1,8 @@
 import React from 'react'
-import { Header, Image, Table, Button } from 'semantic-ui-react'
-import Batman from '../../images/icons/Batman.svg'
-import Beach from '../../images/icons/Beach.svg'
-import Alien from '../../images/icons/Alien.svg' 
+import { Table } from 'semantic-ui-react'
 import { StyleSheet, css } from 'aphrodite';
+import ChatLink from './ChatLink'
+
 
 const sheet = StyleSheet.create({
   div:{
@@ -12,10 +11,10 @@ const sheet = StyleSheet.create({
 
   }
 })
-const images = [Batman, Beach, Alien]
 
 const ChatList = (props) =>{
   const chats = props.chats
+  const newChat = {members: '-', name: 'New Chat'}
   return (
     <div className={css(sheet.div)}>
       <h2>Chats</h2>
@@ -27,26 +26,8 @@ const ChatList = (props) =>{
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {chats.map((chat, idx) => 
-            <Table.Row key={idx}>
-              <Table.Cell>
-                <Header as='h4' image>
-                  <Image src={images[idx]} size='mini' />
-                  <Header.Content>
-                    {chat.name}
-                  </Header.Content>
-                </Header>
-              </Table.Cell>
-              <Table.Cell>
-                <Button
-                onClick={()=>props.handleClick(chat)}
-                inverted color='orange' 
-                content={chat.members} 
-                icon='angle right' labelPosition='right' 
-                 />
-              </Table.Cell>
-            </Table.Row>
-          )}
+          <ChatLink chat={newChat} create={true}/>
+          {chats.map((chat) => <ChatLink key={chat.id} chat={chat}/>)}
         </Table.Body>
       </Table>
     </div>
