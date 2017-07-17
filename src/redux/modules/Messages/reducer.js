@@ -35,6 +35,18 @@ export default (state = initialState, action) => {
         },
         status: 'updated'  
       }
+    case 'NEW_CHAT_MESSAGES':
+      var key = Object.keys(action.messages)[0]
+      key = parseInt(key, 10)
+      if (state.messages[key]) {
+        return state
+      }
+      return {
+        ...state,
+        messages: {
+          ...state.messages, [key]: action.messages
+        }
+      }
 		default:
 		  return state;
 	}
