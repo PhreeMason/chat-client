@@ -15,7 +15,6 @@ const editProfile = (link, editable) =>{
 const bioText = 'Poutine quinoa adaptogen, minim tumeric ramps ennui occaecat live-edge non authentic. Wolf actually kogi, enim put a bird on it chicharrones YOLO celiac ad cillum. Echo park disrupt tbh poutine vegan tempor excepteur eiusmod proident waistcoat officia id dolore tumeric deserunt. Put a bird on it cupidatat freegan, nisi poke williamsburg vexillologist.'
 
 const UserShow = (props) =>{
-  console.log(props)
 	const {user} = props 
   return (
     <Grid.Column width={6}>
