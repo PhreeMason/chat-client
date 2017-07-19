@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'http://localhost:3001/api/v1';
+const url = 'https://lit-ridge-65285.herokuapp.com/api/v1';
 
 const token = () => localStorage.getItem('token');
 
