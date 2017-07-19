@@ -22,7 +22,7 @@ export const errorHandler = (error, dispatch) =>{
   } else if (error.request) {
     dispatch(serverDown())
   } else {
-    alert('Something just broke and I dont know how to fix it');
+    alert('Something went wrong please rephresh and try again');
   }
 };
 
