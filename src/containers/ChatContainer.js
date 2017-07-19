@@ -9,7 +9,6 @@ import ChatShow from '../components/Chat/ChatShow'
 import {updateMesages} from '../redux/modules/Messages/actions' 
 import ChatsNew from '../components/Chat/ChatsNew'
 
-
 class ChatContainer extends React.Component {
 
   componentDidMount() {
@@ -24,10 +23,6 @@ class ChatContainer extends React.Component {
   }
   componentWillUnmount() {
     this.props.apiCable.messenger.unsubscribe()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
   }
 
   render() {
