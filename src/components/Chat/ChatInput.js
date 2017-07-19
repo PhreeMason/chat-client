@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Button, Icon } from 'semantic-ui-react'
+import { Form, TextArea, } from 'semantic-ui-react'
 
 export default class ChatInput extends React.Component {
   constructor() {
@@ -9,10 +9,17 @@ export default class ChatInput extends React.Component {
   	}
   }
   
-  handleChange = (event) =>{
-  	this.setState({
-  		body: event.target.value
-  	})
+  handleChange = (e) =>{
+    this.setState({
+      body: e.target.value
+    })
+
+  }
+
+  handleKeyPress = (e) =>{
+    if (e.key === 'Enter') {
+      this.handleSubmit(e)
+    }
   }
 
   handleSubmit = (e) =>{
@@ -28,13 +35,12 @@ export default class ChatInput extends React.Component {
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-		    <Input>
-		     <input onChange={this.handleChange} 
-		      value={this.state.body} />
-		      <Button icon type='submit'>
-            <Icon name='send outline'/>
-		      </Button>
-		    </Input>
+		  <TextArea autoHeight 
+        placeholder='Try adding multiple lines' rows={2}
+        onKeyPress={this.handleKeyPress}
+        onChange={this.handleChange}
+        value={this.state.body}  
+      />
 		  </Form>
     );
   }
