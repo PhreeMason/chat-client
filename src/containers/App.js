@@ -15,7 +15,6 @@ import ChatContainer from './ChatContainer'
 //     }
 // });
 const Chats = userIsAuthenticated(ChatContainer)
-const Games = () =>(<h1>Games</h1>)
 const NotFound = () =>(<h1>Wrong turn</h1>)
 const Home = ()=>(<h1>Welcome To Chit Chat</h1>)
 const Pro= userIsAuthenticated(Profile)

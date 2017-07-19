@@ -5,7 +5,6 @@ import MessageShow from './MessageShow'
 import PropTypes from 'prop-types'
 import {directMessage} from '../../redux/modules/Chats/actions'
 import {connect} from 'react-redux'
-import {getUser} from '../../redux/modules/User/actions'
 
 class ChatShow extends React.Component {
   constructor() {
@@ -59,4 +58,4 @@ ChatShow.propTypes = {
   apiCable: PropTypes.object.isRequired
 };
 
-export default connect(null, {directMessage, getUser})(ChatShow);
+export default connect(null, {directMessage})(ChatShow);
