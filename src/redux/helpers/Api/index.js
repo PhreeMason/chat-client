@@ -8,15 +8,15 @@ axios.defaults.headers.common['Authorization'] = token()
 
 export default {
 	createUser(user){
-		return axios.post(`${url}/users`, user) 
+		return axios.post(`${url}/users.json`, user) 
 	},
 
 	loginUser(user){
-		return axios.post(`${url}/auth`, user)
+		return axios.post(`${url}/auth.json`, user)
 	},
 
 	auth(){
-		return axios.post(`${url}/auth/refresh`)
+		return axios.post(`${url}/auth/refresh.json`)
 	},
 
 	getChats(){
@@ -41,6 +41,10 @@ export default {
 
 	directMessage(username){
 		return axios.post(`${url}/chatrooms/direct_message.json`, {user: username})
+	},
+
+	updateUser(data){
+		return axios.patch(`${url}/users.json`, {user: data})
 	}
 }
 
