@@ -6,14 +6,24 @@ import ChatLink from './ChatLink'
 
 const sheet = StyleSheet.create({
   div:{
-    height: '100%',
+    maxHeight: '600px',
     overflowY: 'auto'
 
   }
 })
 
 const ChatList = (props) =>{
-  const chats = props.chats
+  const chats = props.chats.sort(function(a, b) {
+    var nameA = a.name.toUpperCase();
+    var nameB = b.name.toUpperCase();
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
   const newChat = {members: '-', name: 'New Chat'}
   return (
     <div className={css(sheet.div)}>
