@@ -17,10 +17,8 @@ import ChatContainer from './ChatContainer'
 const Chats = userIsAuthenticated(ChatContainer)
 const Games = () =>(<h1>Games</h1>)
 const NotFound = () =>(<h1>Wrong turn</h1>)
-const Home = ()=>(<h1>Home Page</h1>)
-const HomePage = userIsAuthenticated(Home)
+const Home = ()=>(<h1>Welcome To Chit Chat</h1>)
 const Pro= userIsAuthenticated(Profile)
-const Game = userIsAuthenticated(Games)
 
 
 class App extends Component {
@@ -43,11 +41,10 @@ class App extends Component {
           </div>
           {errors.length ? <ErrorShow clearErrors={clearErrors}errors={errors}/> : null}
           <Switch>
-            <Route exact path="/" component={HomePage} />
+            <Route exact path="/" component={Home} />
             <Route path="/login" component={Auth} />
             <Route path="/chats" render={(props)=> <Chats {...props} apiCable={apiCable}/> }/>
-            <Route path="/profile" component={Pro} />
-            <Route path="/games" component={Game} />
+            <Route path="/profile/" component={Pro}/>
             <Route component={NotFound}/>
           </Switch>
         </div>

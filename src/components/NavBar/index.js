@@ -49,15 +49,6 @@ class NavBar extends Component {
 	          >
 	           Chat
 	          </Menu.Item>
-
-	          <Menu.Item
-	          as={ Link } to='/games' 
-	            name='games' 
-	            active={activeItem === 'games'} 
-	            onClick={this.handleItemClick}
-	          >
-	           Games
-	          </Menu.Item>
 	        </Menu.Menu>
         :null}
         
