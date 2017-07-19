@@ -28,26 +28,30 @@ export const getChats =()=>{
   return dispatch => {
     dispatch(gettingChats())
     return serverApi.getChats()
-    .then(body=>{
-      if (body.errors) {
-        dispatch(getChatsFailed)
-        return errorHandler(body, dispatch)   
-      } else {
+      .then(body => {
         const chats = body.data.chatrooms
         const messages = body.data.messages
         dispatch(addChat(chats));
-        dispatch(addMessages(messages));
-      }
-    })
+        dispatch(addMessages(messages))
+      })
+      .catch((err) => {
+        dispatch(getChatsFailed)
+        errorHandler(err, dispatch)
+      })
   }
 }
+
+
 
 export const createChat =(params)=>{
   return dispatch =>{
     dispatch(gettingChats())
     return serverApi.createChat(params)
       .then(body => {
-        getChats(dispatch)
+        const chats = body.data.chatrooms
+        const messages = body.data.messages
+        dispatch(addChat(chats));
+        dispatch(addMessages(messages))
       })
       .catch((err) => {
         dispatch(getChatsFailed)
@@ -55,6 +59,7 @@ export const createChat =(params)=>{
       })
   } 
 }
+
 
 export const directMessage = (username) =>{
   return dispatch =>{
