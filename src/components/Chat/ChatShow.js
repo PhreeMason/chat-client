@@ -2,10 +2,11 @@ import React from 'react';
 import {Grid} from 'semantic-ui-react'
 import ChatInput from './ChatInput'
 import MessageShow from './MessageShow'
-import Loading from '../Loading'
 import PropTypes from 'prop-types'
 import {directMessage} from '../../redux/modules/Chats/actions'
 import {connect} from 'react-redux'
+import {getUser} from '../../redux/modules/User/actions'
+
 class ChatShow extends React.Component {
   constructor() {
     super();
@@ -42,7 +43,11 @@ class ChatShow extends React.Component {
     const { messages } = this.state
     return (
       <Grid.Column width={10}>
-        {messages.length? <MessageShow username={this.props.currentUsername} messages={messages} dM={this.props.directMessage}/> : <Loading/>}   
+        {messages.length? <MessageShow
+          username={this.props.currentUsername} 
+          messages={messages} dM={this.props.directMessage}/> 
+          : <h4>No messages yet be the first by typing below!</h4>}   
+        <br/>
         <ChatInput handleSubmit={this.handleSubmit}/>
       </Grid.Column> 
     );
@@ -54,4 +59,4 @@ ChatShow.propTypes = {
   apiCable: PropTypes.object.isRequired
 };
 
-export default connect(null, {directMessage})(ChatShow);
+export default connect(null, {directMessage, getUser})(ChatShow);
