@@ -1,32 +1,31 @@
 import React from 'react';
 import {connect} from 'react-redux'
-import { Card, Icon } from 'semantic-ui-react'
-
-const extra = (
-  <a>
-    <Icon name='user' />
-    16 Friends
-  </a>
-)
+import ProfileForm from './ProfileForm'
+import UserShow from './UserShow'
+import {Grid} from 'semantic-ui-react'
+import { Route } from 'react-router-dom'
 
 class Profile extends React.Component {
- 
+
   render() {
-  	const {user} = this.props
+  	const {currentUser, match} = this.props
     return (
-		  <Card
-		    image='/assets/images/avatar/large/elliot.jpg'
-		    header={user.username}
-		    meta='Friend'
-		    description='Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat.'
-		    extra={extra}
-		  />
+      <Grid padded>
+        <Grid.Column width={6}>
+          <UserShow user={currentUser}/>
+        </Grid.Column>
+        <Grid.Column width={6}>
+          <Route path={`${match.url}/edit`} component={ProfileForm} />
+        </Grid.Column>
+      </Grid>
 		)
   }
 }
 
 const mapStateToProps=(state)=>{
-  return {user: state.auth.currentUser}
+  return {
+    currentUser: state.auth.currentUser,
+  }
 }
 
 export default connect(mapStateToProps)(Profile)
