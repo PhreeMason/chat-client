@@ -11,7 +11,7 @@ class ChatsNew extends Component {
 
   handleSubmit = e => {
     const {name} = this.state
-    this.props.createChat({name: name.trim()})
+    this.props.createChat({name: name.trim()}, this.props.history)
     this.setState({name:''})
   }
 
