@@ -10,6 +10,8 @@ export default (state = initialState, action) => {
 		  return action.errors
 		case 'NO_ERRORS':
 		  return []
+		case 'TRY_AGAIN':
+		  return ['Something went wrong please refresh and try again']
 		default:
 		  return state;
 	}
