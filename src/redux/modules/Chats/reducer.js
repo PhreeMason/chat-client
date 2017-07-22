@@ -28,6 +28,15 @@ export default (state = initialState, action) => {
 		  	status: 'updated',
 		  	chats:[...state.chats, action.chat]
 		  }
+		case 'REMOVE_CHAT':
+		  var chats = []
+		  state.chats.forEach((chat) => {
+		    if (chat.id !== action.id) {chats.push(chat)}
+		  })
+		  return {
+		  	...state,
+		  	chats: chats
+		  }
 		default:
 		  return state;
 	}

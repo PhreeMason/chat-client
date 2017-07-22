@@ -23,12 +23,12 @@ export default {
 		return axios.get(`${url}/chatrooms.json`)
 	},
 
-	joinChat(chatroom_id){
-		return axios.post(`${url}/chatrooms/${chatroom_id}/chatroom_users.json`)
-	},
-
 	createChat(params){
 		return axios.post(`${url}/chatrooms.json`, {chatroom: params})
+	},
+
+	joinChat(chatroom_id){
+		return axios.post(`${url}/chatrooms/${chatroom_id}/chatroom_users.json`)
 	},
 
   leaveChat(chatroom_id){
@@ -45,7 +45,7 @@ export default {
 
 	updateUser(data){
 		return axios.patch(`${url}/users.json`, {user: data})
-	}
+	},
 }
 
 
