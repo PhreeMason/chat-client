@@ -12,8 +12,9 @@ const sheet = StyleSheet.create({
   }
 })
 
-const ChatList = (props) =>{
-  const chats = props.chats.sort(function(a, b) {
+
+const sortAbcOrder = (chats) =>{
+  const sortedChats = chats.sort(function(a, b) {
     var nameA = a.name.toUpperCase();
     var nameB = b.name.toUpperCase();
     if (nameA < nameB) {
@@ -24,6 +25,21 @@ const ChatList = (props) =>{
     }
     return 0;
   });
+  return sortedChats
+}
+
+const ChatList = (props) =>{
+  var chats = props.chats
+  
+  chats.forEach((chat) => {
+    if (chat.dm) {
+      var newName = chat.dm.filter(name=> name !== props.username)
+      chat.name = newName[0]
+    }
+  })
+
+  chats = sortAbcOrder(chats)
+
   const newChat = {members: '-', name: 'New Chat'}
   return (
     <div className={css(sheet.div)}>
@@ -31,7 +47,7 @@ const ChatList = (props) =>{
       <Table basic='very' celled collapsing>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Chats</Table.HeaderCell>
+            <Table.HeaderCell>Name</Table.HeaderCell>
             <Table.HeaderCell>Members</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
