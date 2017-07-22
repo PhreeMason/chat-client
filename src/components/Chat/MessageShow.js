@@ -23,7 +23,9 @@ const linkUser = (username, dM, getUser) => (
 const MessageShow = ({dM, messages, username}) =>{
   setTimeout(() => {
     const messageBox = document.getElementsByClassName('messages_8ggv56')
-    messageBox["0"].scrollTop = messageBox["0"].scrollHeight;
+    if (messageBox["0"]) {
+      messageBox["0"].scrollTop = messageBox["0"].scrollHeight;
+    }
   }, 250)
   return (
     <div className={css(sheet.messages)}>

@@ -3,51 +3,74 @@ import {Grid} from 'semantic-ui-react'
 import ChatInput from './ChatInput'
 import MessageShow from './MessageShow'
 import PropTypes from 'prop-types'
-import {directMessage} from '../../redux/modules/Chats/actions'
+import {directMessage, leaveChat} from '../../redux/modules/Chats/actions'
 import {connect} from 'react-redux'
+import {updateMesages, setCurrentMessages} from '../../redux/modules/Messages/actions'
+import Loading from '../Loading'
+import { Button, Popup } from 'semantic-ui-react'
 
 class ChatShow extends React.Component {
-  constructor() {
-    super();
-    this.state ={
-      messages:[]
-    }
-  }
   
   componentDidMount() {
-    setTimeout(()=>this.setMessages(this.props), 500)
+    this.setMessages(this.props)
   } 
 
-  handleSubmit=(body)=>{
-    const message = {chatroom_id: this.props.match.params.chatId, body: body}
-    this.props.apiCable.messenger.perform("send_message", message)
+  handleSubmit = (body) =>{
+    const id = this.props.match.params.chatId
+    const message = {chatroom_id: id, body: body}
+    this.props.apiCable[`chat_${id}`].perform("send_message", message)
   }
-  
+
   componentWillReceiveProps(nextProps) {
     this.setMessages(nextProps)
   }
 
   setMessages =(props)=>{
-    const currentId = parseInt(props.match.params.chatId, 10)
-    const currentMessages = props.messages[currentId]
-
-    if (currentMessages) {
-      this.setState({
-        messages: currentMessages
+    const oldId = parseInt(this.props.match.params.chatId, 10)
+    const id = parseInt(props.match.params.chatId, 10)
+    const {apiCable, setCurrentMessages} = props
+    if (!apiCable[`chat_${id}`]) {
+      setCurrentMessages(id)
+      apiCable[`chat_${id}`] = apiCable.subscriptions.create({channel: 'ChatroomsChannel', id: id}, {
+        connected: function() { console.log('connected') },
+        disconnected: function() { console.log("cable: disconnected") },
+        received: (data) => this.props.updateMesages(data)
       })
     }
+    if (oldId !== id) {setCurrentMessages(id)}
   }
- 
+
+  leaveRoom = () =>{
+    this.props.leaveChat(parseInt(this.props.match.params.chatId, 10))
+    this.props.history.replace('/chats')
+  }
+  
+  componentWillUnmount() {
+    const {apiCable} = this.props
+    apiCable.subscriptions.subscriptions.forEach((sub) => {
+      var identifier = JSON.parse(sub.identifier)
+      sub.unsubscribe()
+      apiCable[`chat_${identifier.id}`] = null
+    })
+  }
+
   render() {
-    const { messages } = this.state
+    const { messages, status } = this.props.messages
     return (
       <Grid.Column width={10}>
-        {messages.length? <MessageShow
-          username={this.props.currentUsername} 
+        {status === 'fetched'? <MessageShow
+          username={this.props.currentUsername}
           messages={messages} dM={this.props.directMessage}/> 
-          : <h4>No messages yet be the first by typing below!</h4>}   
+          : <Loading />}   
         <br/>
         <ChatInput handleSubmit={this.handleSubmit}/>
+        <br/>
+        <Popup     
+          trigger={<Button color='red' icon='flask' content='Leave Chat' />}
+          content={<Button negative onClick={()=>this.leaveRoom()} content='Confirm to leave the Chat' />}
+          on='click'
+          position='top right'
+        />
       </Grid.Column> 
     );
   }
@@ -58,4 +81,10 @@ ChatShow.propTypes = {
   apiCable: PropTypes.object.isRequired
 };
 
-export default connect(null, {directMessage})(ChatShow);
+function mapStateToProps(state) {
+  return {
+    messages: state.messages
+  }
+}
+
+export default connect(mapStateToProps, {leaveChat, directMessage, updateMesages, setCurrentMessages})(ChatShow);
