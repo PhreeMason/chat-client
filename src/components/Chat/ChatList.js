@@ -8,7 +8,6 @@ const sheet = StyleSheet.create({
   div:{
     maxHeight: '600px',
     overflowY: 'auto'
-
   }
 })
 
@@ -40,7 +39,7 @@ const ChatList = (props) =>{
 
   chats = sortAbcOrder(chats)
 
-  const newChat = {members: '-', name: 'New Chat'}
+  const newChat = {members: '-', name: 'Create New Chat'}
   return (
     <div className={css(sheet.div)}>
       <h2>Chats</h2>
