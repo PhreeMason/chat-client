@@ -20,7 +20,7 @@ const linkUser = (username, dM, getUser) => (
   </Popup>
 )
 
-const MessageShow = ({dM, messages, username}) =>{
+const MessageShow = ({dM, messages=[], username}) =>{
   setTimeout(() => {
     const messageBox = document.getElementsByClassName('messages_8ggv56')
     if (messageBox["0"]) {

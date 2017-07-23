@@ -1,5 +1,5 @@
 const initialState = {
-	messages: [],
+	messages: {},
 	status: null
 }
 
@@ -12,15 +12,20 @@ export default (state = initialState, action) => {
 			}
     case 'GET_MESSAGES_SUCCESS':
       return {
-      	messages: action.messages, 
+        ...state,
+      	messages: {
+          ...state.messages,
+          [action.room_id]: action.messages
+        }, 
       	status: 'fetched'
       }
     case 'ADD_MESSAGE':
       return {
         ...state,
-        messages:[
-          ...state.messages, action.message
-        ]
+        messages:{
+          ...state.messages, 
+          [action.room_id]: [...state.messages[action.room_id], action.message]
+        }
       }
 		default:
 		  return state;

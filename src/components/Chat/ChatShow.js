@@ -26,22 +26,22 @@ class ChatShow extends React.Component {
   }
 
   setMessages =(props)=>{
-    const oldId = parseInt(this.props.match.params.chatId, 10)
-    const id = parseInt(props.match.params.chatId, 10)
+    const oldId = this.getId(this.props)
+    const id = this.getId(props)
     const {apiCable, setCurrentMessages} = props
     if (!apiCable[`chat_${id}`]) {
       setCurrentMessages(id)
       apiCable[`chat_${id}`] = apiCable.subscriptions.create({channel: 'ChatroomsChannel', id: id}, {
         connected: function() { console.log('connected') },
         disconnected: function() { console.log("cable: disconnected") },
-        received: (data) => this.props.updateMesages(data)
+        received: (data) => this.props.updateMesages(data, id)
       })
     }
     if (oldId !== id) {setCurrentMessages(id)}
   }
 
   leaveRoom = () =>{
-    this.props.leaveChat(parseInt(this.props.match.params.chatId, 10))
+    this.props.leaveChat(this.getId(this.props))
     this.props.history.replace('/chats')
   }
   
@@ -52,15 +52,21 @@ class ChatShow extends React.Component {
       sub.unsubscribe()
       apiCable[`chat_${identifier.id}`] = null
     })
+    console.log(apiCable)
+  }
+  
+  getId = (props) =>{
+    return parseInt(props.match.params.chatId, 10)
   }
 
   render() {
+    const id = this.getId(this.props)
     const { messages, status } = this.props.messages
     return (
       <Grid.Column width={10}>
         {status === 'fetched'? <MessageShow
           username={this.props.currentUsername}
-          messages={messages} dM={this.props.directMessage}/> 
+          messages={messages[id]} dM={this.props.directMessage}/> 
           : <Loading />}   
         <br/>
         <ChatInput handleSubmit={this.handleSubmit}/>
