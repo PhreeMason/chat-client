@@ -52,7 +52,6 @@ class ChatShow extends React.Component {
       sub.unsubscribe()
       apiCable[`chat_${identifier.id}`] = null
     })
-    console.log(apiCable)
   }
   
   getId = (props) =>{
