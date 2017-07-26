@@ -15,10 +15,11 @@ import ChatContainer from './ChatContainer'
 //     }
 // });
 const Chats = userIsAuthenticated(ChatContainer)
-const NotFound = () =>(<h1>Wrong turn</h1>)
-const Home = ()=>(<h1>Welcome To Chit Chat</h1>)
-const Pro= userIsAuthenticated(Profile)
-
+const NotFound = () =>(<h1>404</h1>)
+const Home = ()=>(<h1>Welcome</h1>)
+const Pro = userIsAuthenticated(Profile)
+const GamesPage = () => (<h1>Coming Soon...</h1>)
+const Games = userIsAuthenticated(GamesPage)
 
 class App extends Component {
 
@@ -42,6 +43,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Auth} />
+            <Route path="/games" component={Games} />
             <Route path="/chats" render={(props)=> <Chats {...props} apiCable={apiCable}/> }/>
             <Route path="/profile/" component={Pro}/>
             <Route component={NotFound}/>
