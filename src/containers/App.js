@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import NavBar from '../components/NavBar'
+import Games from '../components/Games'
 import Profile from '../components/Profile'
 import Auth from '../components/Auth'
 import {ErrorShow} from './ErrorShow'
@@ -18,8 +19,7 @@ const Chats = userIsAuthenticated(ChatContainer)
 const NotFound = () =>(<h1>404</h1>)
 const Home = ()=>(<h1>Welcome</h1>)
 const Pro = userIsAuthenticated(Profile)
-const GamesPage = () => (<h1>Coming Soon...</h1>)
-const Games = userIsAuthenticated(GamesPage)
+const GamesPage = userIsAuthenticated(Games)
 
 class App extends Component {
 
@@ -43,7 +43,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Auth} />
-            <Route path="/games" component={Games} />
+            <Route path="/games" component={GamesPage} />
             <Route path="/chats" render={(props)=> <Chats {...props} apiCable={apiCable}/> }/>
             <Route path="/profile/" component={Pro}/>
             <Route component={NotFound}/>
