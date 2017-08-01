@@ -13,7 +13,7 @@ const sheet = StyleSheet.create({
 const editProfile = (link, editable) =>{
   return(
     <Popup
-      trigger={<Image shape='circular' centered size="medium" src={"https://unsplash.it/300/300/?blur'"} />}
+      trigger={<Image shape='circular' centered size="medium" src={ link ||"https://unsplash.it/300/300/?blur'"} />}
       content={<Button as={Link} to={'profile/edit'} content='Edit' />}
       on='click'
     />)
