@@ -1,9 +1,12 @@
 import React from 'react';
-import {Blank} from '../../images/dominos'
+import {Blank, Deuce} from '../../images/dominos'
 
 const Games = () =>{
   return (
-    <Blank/>
+    <div>
+      <Blank/>
+      <Deuce/> 
+    </div>
   );
 }
 
