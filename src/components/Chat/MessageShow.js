@@ -6,7 +6,7 @@ const sheet = StyleSheet.create({
   messages:{
     minHeight: '300px',
     maxHeight: '600px',
-    overflowY: 'scroll'
+    overflowY: 'scroll',
   }
 })
 
@@ -30,7 +30,7 @@ const MessageShow = ({dM, messages=[], username}) =>{
   return (
     <div className={css(sheet.messages)}>
       {messages.map((message, i) =>
-        <Segment key={i} raised
+        <Segment key={i} raised inverted
           color={username === message.user_name ?'black':'orange'}
           textAlign={username === message.user_name ?'right':'left'}> 
           {username === message.user_name ? null : linkUser(message.user_name, dM)}
