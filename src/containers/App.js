@@ -8,10 +8,9 @@ import { userIsAuthenticated, authenticate, authenticationFail} from '../redux/m
 import {clearErrors} from '../redux/modules/Error/actions'
 import {connect} from 'react-redux'
 import ChatContainer from './ChatContainer'
-
+import Home from './Home'
 const Chats = userIsAuthenticated(ChatContainer)
 const NotFound = () =>(<h1>404</h1>)
-const Home = ()=>(<h1>Welcome</h1>)
 const Pro = userIsAuthenticated(Profile)
 
 class App extends Component {
@@ -25,12 +24,12 @@ class App extends Component {
     }
   }
   render() {
-    const {errors, apiCable, clearErrors} = this.props
+    const {errors, apiCable, clearErrors, isAuthenticated} = this.props
     return (
       <Router>
         <div>
           <div className="navbar">
-            <NavBar/>
+           {isAuthenticated ? <NavBar/> : null}
           </div>
           {errors.length ? <ErrorShow clearErrors={clearErrors}errors={errors}/> : null}
           <Switch>
@@ -48,7 +47,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    errors: state.errors
+    errors: state.errors,
+    isAuthenticated: state.auth.isAuthenticated
   }
 }
 
