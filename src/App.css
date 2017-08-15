@@ -5,9 +5,45 @@
 	background: #808080;  /* fallback for old browsers */
 	background: -webkit-linear-gradient(to bottom, #3fada8, #808080);  /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to bottom, #3fada8, #808080); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	margin: 0 auto;
+	line-height: 1.5;
 }
 
 svg {
   width: 200px; 
   height: 200px;
-  }
+}
+
+.Landing {
+  font-family: "Georgia", "Arial", sans-serif;
+  background-image: url('./images/landingsplash.jpeg');
+  height: 100vh; 
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.Landing h1{
+  font-size: 50px;
+  line-height: 1.2;
+}
+
+.Landing .authenticate{
+	font-size: 18px;
+	text-decoration: none;
+	color: #02508c;
+	border: #02508c 1px solid;
+	padding: 10px 20px;
+	border-radius: 10px;
+	margin-top: 10px;
+}
+
+.Landing .authenticate:hover{
+  background: #02508c;
+  color:#fff;
+}
