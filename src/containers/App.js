@@ -36,7 +36,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Auth} />
             <Route path="/chats" render={(props)=> <Chats {...props} apiCable={apiCable}/> }/>
-            <Route path="/profile/" component={Pro}/>
+            <Route path="/profile/:username" component={Pro}/>
             <Route component={NotFound}/>
           </Switch>
         </div>

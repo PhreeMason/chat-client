@@ -39,7 +39,7 @@ export const signup = (user, history)=>{
         localStorage.setItem('token', token);
         dispatch(setCurrentUser(user));
         dispatch(reset('signup'));
-        history.push(`/profile`);    
+        history.push(`/profile/${user.username}`);    
 		})
     .catch(error=>{
       dispatch(authenticationFail)

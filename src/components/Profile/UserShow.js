@@ -5,6 +5,7 @@ import { StyleSheet, css } from 'aphrodite';
 
 const sheet = StyleSheet.create({
   image:{
+    marginTop: '20px',
     maxWidth: '100%',
     height: 'auto',
   }
