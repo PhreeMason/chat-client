@@ -1,22 +1,37 @@
 import React from 'react';
-import { Segment, Button, Popup} from 'semantic-ui-react'
+import { Segment, Button, Popup, Grid} from 'semantic-ui-react'
 import { StyleSheet, css  } from 'aphrodite';
+import { Link } from 'react-router-dom';
 
 const sheet = StyleSheet.create({
   messages:{
     minHeight: '300px',
     maxHeight: '600px',
     overflowY: 'scroll',
+  },
+
+  username:{
+    cursor: 'pointer',
   }
 })
 
 
-const linkUser = (username, dM, getUser) => (
-  <Popup wide trigger={<strong>{username}</strong>} on='click'>
-    <Popup
-      trigger={<Button icon='talk' onClick={()=>dM({username: username})} />}
-      content='Message'
-    />
+const linkUser = (username, dM) => (
+  <Popup wide trigger={<strong className={css(sheet.username)}>{username}</strong>} on='click'>
+    <Grid divided columns='equal'>
+       <Grid.Column>
+          <Popup
+            trigger={<Button icon='talk' onClick={()=>dM({username: username})} />}
+            content='Message'
+          />
+        </Grid.Column>
+        <Grid.Column>
+          <Popup
+            trigger={<Button icon='user' as={ Link } to={`/profile/${username}`} />}
+            content='Profile'
+          />
+      </Grid.Column>
+    </Grid>
   </Popup>
 )
 
@@ -42,6 +57,3 @@ const MessageShow = ({dM, messages=[], username}) =>{
 }
 
 export default MessageShow
-
-
-
