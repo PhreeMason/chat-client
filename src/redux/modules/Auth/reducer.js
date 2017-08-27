@@ -1,7 +1,8 @@
 const initialState = {
 	isAuthenticated: false,
 	willAuthenticate:true,
-	currentUser: null
+	currentUser: null,
+	currentProfile: null
 }
 
 export default (state = initialState, action) => {
@@ -19,7 +20,11 @@ export default (state = initialState, action) => {
 		  }
 		case 'AUTHENTICATION_FAIL':
 		  return Object.assign({}, initialState, { willAuthenticate: false });
-
+    case 'USER_PROFILE':
+      return {
+      	...state,
+      	currentProfile: action.user
+      }
     case 'LOGOUT': 
       return Object.assign({}, initialState, { willAuthenticate: false });
 		default:
