@@ -46,6 +46,10 @@ export default {
 	updateUser(data){
 		return axios.patch(`${url}/users.json`, {user: data})
 	},
+
+	userProfile(username){
+		return axios.get(`${url}/users/${username}.json`)
+	}
 }
 
 
