@@ -57,7 +57,7 @@ export const login = (user, history) => {
         localStorage.setItem('token', token);
         dispatch(setCurrentUser(user))
         dispatch(reset('login'));
-        history.push(`/profile`);
+        history.push(`/profile/${user.username}`);
       })
       .catch((err) => {
         dispatch(authenticationFail)
