@@ -24,10 +24,15 @@ export default (state = initialState, action) => {
       return {
       	...state,
       	currentProfile: action.user
-      }
+			}
+		case 'SAME_USER':
+		  return {
+				...state,
+				currentProfile: state.currentUser
+			}
     case 'LOGOUT': 
       return Object.assign({}, initialState, { willAuthenticate: false });
 		default:
-		  return state;
+			return state;
 	}
 }

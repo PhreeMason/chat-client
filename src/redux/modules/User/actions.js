@@ -9,6 +9,12 @@ const currentProfile = user => {
 	}
 }
 
+const sameUser = () =>{
+	return {
+		type: 'SAME_USER'
+	}
+}
+
 export const updateUser = (data) =>{
 	return dispatch => {
 		return serverApi.updateUser(data)
@@ -33,3 +39,4 @@ export const viewProfile = (username) =>{
 		})
   }
 }
+
