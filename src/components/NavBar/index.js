@@ -28,7 +28,7 @@ class NavBar extends Component {
         <Menu.Menu>
 
         	<Menu.Item 
-            as={ Link } to='/profile'
+            as={ Link } to={`/profile/${this.props.username}`}
             name='profile' 
             active={activeItem === 'profile'} 
             onClick={this.handleItemClick}
@@ -64,5 +64,10 @@ class NavBar extends Component {
   }
 }
 
+const mapStateToProps=(state)=>{
+  return {
+    username: state.auth.currentUser.username
+  }
+}
 
-export default withRouter(connect(null, { logout })(NavBar));
+export default withRouter(connect(mapStateToProps, { logout })(NavBar));
