@@ -7,22 +7,17 @@ import {viewProfile} from '../../redux/modules/User/actions'
 
 class Profile extends React.Component {
   
-  componentDidMount() {
-
-    console.log(this.props.match.params.username)
-  }
   
   componentWillMount() {
     const {currentUser, match, viewProfile} = this.props
-    if (match.params.username !== currentUser.username) {
-      viewProfile(match.params.username)
-    }
+    console.log(match, viewProfile)
   }
+  
   render() {
-  	const {currentUser, match, currentProfile} = this.props
+  	const {currentUser, match} = this.props
     return (
       <div>
-        <UserShow user={currentProfile.username === currentUser.username ? currentUser : currentProfile}/>
+        <UserShow user={currentUser}/>
         <Route path={`${match.url}/edit`} component={ProfileForm} />
       </div>
 		)
