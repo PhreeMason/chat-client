@@ -2,7 +2,8 @@ const initialState = {
 	isAuthenticated: false,
 	willAuthenticate:true,
 	currentUser: null,
-	currentProfile: null
+	currentProfile: null,
+	editable: false
 }
 
 export default (state = initialState, action) => {
@@ -28,8 +29,14 @@ export default (state = initialState, action) => {
 		case 'SAME_USER':
 		  return {
 				...state,
-				currentProfile: state.currentUser
+				currentProfile: state.currentUser,
+				editable: true
 			}
+	  case 'CLEAR_USER':
+	    return {
+	    	...state,
+				currentProfile: null
+	    }
     case 'LOGOUT': 
       return Object.assign({}, initialState, { willAuthenticate: false });
 		default:
