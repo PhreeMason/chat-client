@@ -8,16 +8,20 @@ import {viewProfile} from '../../redux/modules/User/actions'
 class Profile extends React.Component {
   
   
-  componentWillMount() {
+  componentWillMount() { // fetch current profile information
     const {currentUser, match, viewProfile} = this.props
-    console.log(match, viewProfile)
+     viewProfile(match.params.username, currentUser.username)
   }
+
+  //componentWillUnmount() {
+    // clear out the current profile from store
+  //}
   
   render() {
-  	const {currentUser, match} = this.props
+  	const {currentUser, match, editable} = this.props
     return (
       <div>
-        <UserShow user={currentUser}/>
+        <UserShow user={currentUser} editable={editable}/>
         <Route path={`${match.url}/edit`} component={ProfileForm} />
       </div>
 		)
@@ -27,7 +31,8 @@ class Profile extends React.Component {
 const mapStateToProps=(state)=>{
   return {
     currentUser: state.auth.currentUser,
-    currentProfile: state.auth.currentProfile
+    currentProfile: state.auth.currentProfile,
+    editable: state.auth.editable
   }
 }
 
