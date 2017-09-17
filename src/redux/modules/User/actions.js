@@ -27,16 +27,19 @@ export const updateUser = (data) =>{
 	}
 }
 
-export const viewProfile = (username) =>{
+export const viewProfile = (paramsUsername, currentUsername) =>{
   return dispatch => {
-  	return serverApi.userProfile(username)
-  	.then(body=>{
-  		console.log(body)
-  		dispatch(currentProfile(body.user))
-		})
-		.catch(err=>{
-			errorHandler(err, dispatch)		
-		})
+  	if (paramsUsername === currentUsername) {
+      dispatch(sameUser)
+  	} else {
+  		return serverApi.userProfile(username)
+		  	.then(body=>{
+		  		dispatch(currentProfile(body.user))
+				})
+				.catch(err=>{
+					errorHandler(err, dispatch)		
+				})
+	  	}
   }
 }
 
