@@ -12,25 +12,30 @@ const sheet = StyleSheet.create({
 })
 
 const editProfile = (link, editable) =>{
-  return(
-    <Popup
-      trigger={<Image shape='circular' centered size="medium" src={ link ||"https://unsplash.it/300/300/?blur'"} />}
-      content={<Button as={Link} to={'profile/edit'} content='Edit' />}
-      on='click'
-    />)
+  if (editable) {
+    return(
+      <Popup
+        trigger={<Image shape='circular' centered size="medium" src={ link ||"https://unsplash.it/300/300/?blur'"} />}
+        content={<Button as={Link} to={'profile/edit'} content='Edit' />}
+        on='click'
+      />)
+  } 
+  else {
+    return(
+      <Image shape='circular' centered size="medium" src={ link ||"https://unsplash.it/300/300/?blur'"} />
+    ) 
+  }  
 }
 
+
 const bioText = 'Click the image above to edit Your profile'
-
-
-
 
 const UserShow = (props) =>{
 	const {user} = props 
   return (
     <div>
       <div className={css(sheet.image)}>
-        {editProfile(user.pic_link)}
+        {editProfile(user.pic_link, editable)}
       </div>
       <Container textAlign='center'>
         <Header as='h2'>{user.username}</Header>
